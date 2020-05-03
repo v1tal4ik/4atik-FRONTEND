@@ -31,6 +31,7 @@ const AuthContainer = (props) => {
               onChange={handleChangeInput}
               onBlur={onBlur}
               placeholder={placeholder}
+              required
             />
           ))}
           <p className='auth-error'>{error}</p>

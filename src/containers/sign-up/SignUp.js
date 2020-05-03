@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import AuthContainer from '../../components/auth-container/AuthContainer';
 import { userSignUp } from '../../api';
@@ -30,7 +31,8 @@ const SignUp = (props) => {
     setUserData({ ...userData, [name]: value });
   };
 
-  const handleImportDataFromGoogle = () => {
+  const handleImportDataFromGoogle = (e) => {
+    e.preventDefault();
     const authOK = (user) => {
       const email = user.getBasicProfile().getEmail();
       const name = user.getBasicProfile().getName();
