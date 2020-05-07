@@ -19,7 +19,7 @@ HTTP.interceptors.request.use(
       },
     };
   },
-  (error) => error,
+  (error) => error
 );
 
 HTTP.interceptors.response.use(
@@ -27,10 +27,12 @@ HTTP.interceptors.response.use(
   async (err) => {
     const { data, status } = err.response;
     if (status === 401 && data === 'jwt expired') {
-      const msg = await refreshTokens({ id: 'a8e9b71e-648f-4911-8ac1-87cd9adc338f' });
+      const msg = await refreshTokens({
+        id: '06f37359-0682-4d24-96a7-3ea07db5a4a6',
+      });
       return Promise.reject({ response: { data: msg } });
     }
     return Promise.reject(err);
-  },
+  }
 );
 export default HTTP;
