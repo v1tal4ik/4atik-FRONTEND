@@ -1,7 +1,6 @@
 import { userSignIn } from '../../api/user';
 import { setUserData } from '../actions/user';
 
-// eslint-disable-next-line import/prefer-default-export
 export const signInThunk = ({ email, password }, callback) => {
   return async (dispatch) => {
     const response = await userSignIn({ email, password });

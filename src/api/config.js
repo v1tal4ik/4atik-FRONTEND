@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { refreshTokens } from './refreshTokens';
+import store from '../store/index';
 
 const HTTP = axios.create({});
 
 HTTP.interceptors.request.use(
   (config) => {
     const { url, headers } = config;
-    const auth = JSON.parse(localStorage.getItem('auth')) || '';
+    const { id } = store.getState().user;
+    const auth = JSON.parse(localStorage.getItem(id)) || '';
     if (url.includes('1.0/users/login') || url.includes('1.0/users/register')) {
       return config;
     }
@@ -27,9 +29,8 @@ HTTP.interceptors.response.use(
   async (err) => {
     const { data, status } = err.response;
     if (status === 401 && data === 'jwt expired') {
-      const msg = await refreshTokens({
-        id: '06f37359-0682-4d24-96a7-3ea07db5a4a6',
-      });
+      const { id } = store.getState().user;
+      const msg = await refreshTokens({ id });
       return Promise.reject({ response: { data: msg } });
     }
     return Promise.reject(err);
