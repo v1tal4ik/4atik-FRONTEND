@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import AuthContainer from '../../components/auth-container/AuthContainer';
-import { userSignIn } from '../../api';
+import { signInThunk } from '../../store/thunks/user';
 import './style.scss';
 
 const SignIn = (props) => {
@@ -12,17 +13,7 @@ const SignIn = (props) => {
     const { email, password, error } = state;
     if (email && password && !error) {
       e.preventDefault();
-      const response = await userSignIn({ email, password });
-      if (response.status) {
-        const { auth } = response;
-        // TODO use this case
-        // localStorage.setItem(`${user.id}`, JSON.stringify(auth));
-
-        localStorage.setItem('auth', JSON.stringify(auth));
-        props.history.push('/');
-      } else {
-        alert(response.msg);
-      }
+      props.signInThunk({ email, password }, () => props.history.push('/'));
     }
   };
 
@@ -41,4 +32,7 @@ const SignIn = (props) => {
   );
 };
 
-export default SignIn;
+const mapStateToProps = () => ({});
+const actions = { signInThunk };
+
+export default connect(mapStateToProps, actions)(SignIn);
