@@ -1,11 +1,9 @@
 import React from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
-import { useSelector } from 'react-redux';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
   try {
-    const id = useSelector((state) => state.user.id);
-    const tokens = JSON.parse(localStorage.getItem(id));
+    const tokens = JSON.parse(localStorage.getItem('auth'));
     if (!tokens) {
       throw new Error();
     }

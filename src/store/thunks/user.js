@@ -6,7 +6,7 @@ export const signInThunk = ({ email, password }, callback) => {
     const response = await userSignIn({ email, password });
     if (response.status) {
       const { user, auth } = response;
-      localStorage.setItem(`${user.id}`, JSON.stringify(auth));
+      localStorage.setItem('auth', JSON.stringify(auth));
       dispatch(setUserData(user));
       callback();
     } else {

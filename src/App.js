@@ -16,7 +16,7 @@ function App() {
           <Route path='/sign-up' component={SignUp} exact />
           <Route path='/sign-in' component={SignIn} exact />
           <PrivateRoute path='/' component={System} exact />
-          <Redirect to='/sign-up' />
+          <Redirect to='/sign-in' />
         </Switch>
       </BrowserRouter>
     </Provider>
