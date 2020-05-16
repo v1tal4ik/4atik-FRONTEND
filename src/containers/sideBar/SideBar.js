@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import { fetchUserdDataThunk } from '../../store/thunks/user';
 import 'antd/dist/antd.css';
 import './style.scss';
 
-const SideBar = () => {
+const SideBar = (props) => {
+  const user = useSelector((state) => state.user);
+
+  useEffect(() => {
+    if (!user.id) {
+      props.fetchUserdDataThunk();
+    }
+  }, []);
+
   const menu = (
     <Menu style={{ width: '220px', margin: '0 auto' }}>
       <Menu.Item>Change Password</Menu.Item>
@@ -30,7 +40,7 @@ const SideBar = () => {
             href='#'
             style={dropdownStyle}
             onClick={(e) => e.preventDefault()}>
-            v1tal4ik <DownOutlined style={{ fontSize: '24px' }} />
+            {user.name} <DownOutlined style={{ fontSize: '24px' }} />
           </a>
         </Dropdown>
       </div>
@@ -51,4 +61,7 @@ const SideBar = () => {
   );
 };
 
-export default SideBar;
+const mapStateToProps = () => ({});
+const actions = { fetchUserdDataThunk };
+
+export default connect(mapStateToProps, actions)(SideBar);

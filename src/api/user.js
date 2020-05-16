@@ -10,4 +10,10 @@ const userSignUp = ({ email, name, password }) =>
     .then((data) => data.status)
     .catch(({ response }) => response.data);
 
-export { userSignUp, userSignIn };
+const fetchUserData = (params) => {
+  return HTTP.get('1.0/users', { params })
+    .then(({ data }) => data)
+    .catch(({ response }) => ({ status: false, msg: response.data }));
+};
+
+export { userSignUp, userSignIn, fetchUserData };
