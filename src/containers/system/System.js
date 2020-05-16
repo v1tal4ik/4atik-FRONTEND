@@ -6,9 +6,9 @@ import './style.scss';
 
 const System = () => {
   return (
-    <div>
-      <DialogList />
+    <div className='system-container'>
       <Sidebar />
+      <DialogList />
       <Messager />
     </div>
   );
