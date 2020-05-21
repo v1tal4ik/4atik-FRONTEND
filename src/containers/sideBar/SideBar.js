@@ -15,10 +15,14 @@ const SideBar = (props) => {
     }
   }, []);
 
+  const handleOpenModal = (type) => {
+    console.log('work open', type);
+  };
+
   const menu = (
     <Menu style={{ width: '220px', margin: '0 auto' }}>
-      <Menu.Item>Change Password</Menu.Item>
-      <Menu.Item>Change Personal Information</Menu.Item>
+      <Menu.Item onClick={() => handleOpenModal('password')}>Change Password</Menu.Item>
+      <Menu.Item onClick={() => handleOpenModal('personal')}>Change Personal Information</Menu.Item>
     </Menu>
   );
 

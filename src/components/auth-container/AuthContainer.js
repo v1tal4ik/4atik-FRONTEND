@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import TextInput from '../common/TextInput';
+import Button from '../common/Button';
 import './style.scss';
 
 const AuthContainer = (props) => {
@@ -22,9 +24,8 @@ const AuthContainer = (props) => {
         <h4 className='auth-sub-title'>{subTitleText}</h4>
         <form className='auth-form'>
           {inputs.map(({ name, type, value, placeholder, onBlur }) => (
-            <input
+            <TextInput
               key={name}
-              className='auth-input'
               type={type}
               name={name}
               value={value}
@@ -36,13 +37,13 @@ const AuthContainer = (props) => {
           ))}
           <p className='auth-error'>{error}</p>
           {googleBtn && googleBtn.visible ? (
-            <button className='auth-button' onClick={googleBtn.onClick}>
-              Import data from Google
-            </button>
+            <Button textContent='Import data from Google' onClick={googleBtn.onClick} />
           ) : null}
-          <button className='auth-button' type='submit' onClick={submitButton.onClick}>
-            {submitButton.textContent}
-          </button>
+          <Button
+            type='submit'
+            textContent={submitButton.textContent}
+            onClick={submitButton.onClick}
+          />
         </form>
         <Link to={redirectLink.path} className='auth-link'>
           {redirectLink.textContent}
@@ -61,7 +62,7 @@ AuthContainer.propTypes = {
       value: PropTypes.string,
       placeholder: PropTypes.string,
       onBlur: PropTypes.func,
-    }),
+    })
   ),
   handleChangeInput: PropTypes.func.isRequired,
   error: PropTypes.string.isRequired,
