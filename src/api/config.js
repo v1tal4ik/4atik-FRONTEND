@@ -1,13 +1,15 @@
 import axios from 'axios';
 import { refreshTokens } from './refreshTokens';
 
-const HTTP = axios.create({});
+const HTTP = axios.create({
+  baseURL: 'http://localhost:3000/1.0',
+});
 
 HTTP.interceptors.request.use(
   (config) => {
     const { url, headers } = config;
     const auth = JSON.parse(localStorage.getItem('auth')) || '';
-    if (url.includes('1.0/users/login') || url.includes('1.0/users/register')) {
+    if (url.includes('/user/login') || url.includes('1.0/user/register')) {
       return config;
     }
 

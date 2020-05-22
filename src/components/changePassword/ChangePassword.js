@@ -1,12 +1,18 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
 import Rodal from 'rodal';
 import TextInput from '../common/TextInput';
 import Button from '../common/Button';
+
+import { changePassword } from '../../api/user';
 
 import 'rodal/lib/rodal.css';
 import './style.scss';
 
 const ChangePassword = ({ willBeModalOpen, onClose }) => {
+  const { id } = useSelector((state) => state.user);
+
   const [data, setData] = useState({
     oldPassword: '',
     newPassword: '',
@@ -20,8 +26,28 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
     });
   };
 
-  const handleChangePassword = (e) => {
-    console.log(data);
+  const handleCheckPasswords = () => {
+    // TODO add error notification element and logic for it
+    const { newPassword, confirmPassword } = data;
+    if (newPassword === confirmPassword) {
+      console.log('passwords are match');
+    } else {
+      console.log('passwords are not match');
+    }
+  };
+
+  const handleChangePassword = async (e) => {
+    // TODO add error notification element and logic for it
+    e.preventDefault();
+
+    const response = await changePassword(id, {
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword,
+    });
+    alert(response.msg);
+    if (response.status) {
+      onClose();
+    }
   };
 
   return (
@@ -32,7 +58,7 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
       animation={'zoom'}
       duration={400}
       customStyles={{ bottom: '15%' }}
-      onClose={() => onClose('changePassword')}>
+      onClose={onClose}>
       <form className='changePassword-container'>
         <TextInput
           type='password'
@@ -47,6 +73,7 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
           name='newPassword'
           value={data.newPassword}
           onChange={handleChangeData}
+          onBlur={handleCheckPasswords}
           placeholder='New password...'
           required
         />
@@ -55,6 +82,7 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
           name='confirmPassword'
           value={data.confirmPassword}
           onChange={handleChangeData}
+          onBlur={handleCheckPasswords}
           placeholder='Repeat password...'
           required
         />
@@ -62,6 +90,11 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
       </form>
     </Rodal>
   );
+};
+
+ChangePassword.propTypes = {
+  willBeModalOpen: PropTypes.bool.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default ChangePassword;
