@@ -18,7 +18,6 @@ const initialState = {
 
 const ChangePassword = ({ willBeModalOpen, onClose }) => {
   const { id } = useSelector((state) => state.user);
-
   const [data, setData] = useState(initialState);
 
   const handleChangeData = ({ target: { name, value } }) => {
