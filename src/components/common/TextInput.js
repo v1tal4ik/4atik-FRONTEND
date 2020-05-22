@@ -1,11 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './style.scss';
 
-const TextInput = ({ id, name, type, value, onChange, onBlur, placeholder, required }) => (
+const TextInput = ({
+  id,
+  className,
+  name,
+  type,
+  value,
+  onChange,
+  onBlur,
+  placeholder,
+  required,
+}) => (
   <input
     id={id}
     key={name}
-    className='auth-input'
+    className={`general-input ${className}`}
     type={type}
     name={name}
     value={value}
@@ -18,6 +29,7 @@ const TextInput = ({ id, name, type, value, onChange, onBlur, placeholder, requi
 
 TextInput.propTypes = {
   id: PropTypes.string,
+  className: PropTypes.string,
   name: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
