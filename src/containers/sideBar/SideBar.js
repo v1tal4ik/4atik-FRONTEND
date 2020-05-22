@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
 
+import { withRouter } from 'react-router-dom';
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import ChangePassword from '../../components/changePassword/ChangePassword';
@@ -9,6 +10,7 @@ import { fetchUserdDataThunk } from '../../store/thunks/user';
 
 import 'antd/dist/antd.css';
 import './style.scss';
+import Button from '../../components/common/Button';
 
 const SideBar = (props) => {
   const user = useSelector((state) => state.user);
@@ -35,6 +37,13 @@ const SideBar = (props) => {
       ...willBeModalOpen,
       [type]: false,
     });
+  };
+
+  const LogOut = () => {
+    localStorage.removeItem('auth');
+    // TODO dialog window to for confirm log out
+    alert('Log Out');
+    props.history.push('/sign-in');
   };
 
   const menu = (
@@ -79,7 +88,7 @@ const SideBar = (props) => {
         </ul>
       </div>
       <div className='footer-block'>
-        <button>log Out</button>
+        <Button textContent='Log Out' onClick={LogOut} />
       </div>
       <ChangePassword
         willBeModalOpen={willBeModalOpen.changePassword}
@@ -92,4 +101,4 @@ const SideBar = (props) => {
 const mapStateToProps = () => ({});
 const actions = { fetchUserdDataThunk };
 
-export default connect(mapStateToProps, actions)(SideBar);
+export default withRouter(connect(mapStateToProps, actions)(SideBar));
