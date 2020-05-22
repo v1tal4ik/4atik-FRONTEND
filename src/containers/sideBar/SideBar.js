@@ -81,7 +81,10 @@ const SideBar = (props) => {
       <div className='footer-block'>
         <button>log Out</button>
       </div>
-      <ChangePassword willBeModalOpen={willBeModalOpen.changePassword} onClose={handleCloseModal} />
+      <ChangePassword
+        willBeModalOpen={willBeModalOpen.changePassword}
+        onClose={() => handleCloseModal('changePassword')}
+      />
     </div>
   );
 };

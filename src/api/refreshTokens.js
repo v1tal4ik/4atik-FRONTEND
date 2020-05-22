@@ -6,7 +6,7 @@ export const refreshTokens = () => {
   if (auth) {
     const { id, refreshToken } = auth;
     return axios
-      .post('/1.0/secret', { id, refreshToken })
+      .post('/secret', { id, refreshToken })
       .then(({ data }) => {
         const { id, accessToken, refreshToken } = data;
         localStorage.setItem('auth', JSON.stringify({ id, accessToken, refreshToken }));
