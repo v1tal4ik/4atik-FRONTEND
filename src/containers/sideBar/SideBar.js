@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect, useSelector } from 'react-redux';
+
 import { Menu, Dropdown } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import ChangePassword from '../../components/changePassword/ChangePassword';
+
 import { fetchUserdDataThunk } from '../../store/thunks/user';
+
 import 'antd/dist/antd.css';
 import './style.scss';
 
 const SideBar = (props) => {
   const user = useSelector((state) => state.user);
+  const [willBeModalOpen, setWillBeModalOpen] = useState({
+    changePassword: false,
+    changePesonalInfo: false,
+  });
 
   useEffect(() => {
     if (!user.id) {
@@ -16,13 +24,25 @@ const SideBar = (props) => {
   }, []);
 
   const handleOpenModal = (type) => {
-    console.log('work open', type);
+    setWillBeModalOpen({
+      ...willBeModalOpen,
+      [type]: true,
+    });
+  };
+
+  const handleCloseModal = (type) => {
+    setWillBeModalOpen({
+      ...willBeModalOpen,
+      [type]: false,
+    });
   };
 
   const menu = (
     <Menu style={{ width: '220px', margin: '0 auto' }}>
-      <Menu.Item onClick={() => handleOpenModal('password')}>Change Password</Menu.Item>
-      <Menu.Item onClick={() => handleOpenModal('personal')}>Change Personal Information</Menu.Item>
+      <Menu.Item onClick={() => handleOpenModal('changePassword')}>Change Password</Menu.Item>
+      <Menu.Item onClick={() => handleOpenModal('changePesonalInfo')}>
+        Change Personal Information
+      </Menu.Item>
     </Menu>
   );
 
@@ -61,6 +81,7 @@ const SideBar = (props) => {
       <div className='footer-block'>
         <button>log Out</button>
       </div>
+      <ChangePassword willBeModalOpen={willBeModalOpen.changePassword} onClose={handleCloseModal} />
     </div>
   );
 };
