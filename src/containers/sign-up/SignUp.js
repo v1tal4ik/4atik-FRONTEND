@@ -59,13 +59,8 @@ const SignUp = (props) => {
     if (email && name && password && !error) {
       e.preventDefault();
       const result = await userSignUp({ email, name, password });
-      if (result.msg) {
-        setUserData({ ...userData, error: result.msg });
-        setTimeout(() => {
-          setUserData({ ...initialUserData, wasGoogleLoaded: userData.wasGoogleLoaded });
-        }, 3000);
-      } else {
-        alert('You have been successfuly sign up to 4atik!');
+      alert(result.msg || 'You have been successfuly sign up to 4atik!');
+      if (!result.msg) {
         props.history.push('/sign-in');
       }
     }

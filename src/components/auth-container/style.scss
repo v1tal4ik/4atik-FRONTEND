@@ -4,7 +4,7 @@
   height: 99.8vh;
   margin: 0;
   padding: 0;
-  background: url('/image/office-background.jpg') no-repeat center/cover;
+  background: url('/image/office-bg.jpg') no-repeat center/cover;
   background-color: #c9c9c9;
   opacity: 0.6;
 }
@@ -41,40 +41,9 @@
   margin-top: 40px;
 }
 
-.auth-input {
-  width: 250px;
-  display: block;
-  margin: 15px auto 15px auto;
-  padding: 10px 15px;
-  border: 1px solid #c9c9c9;
-  &:hover {
-    cursor: pointer;
-    border-bottom: 1px solid $basic_color;
-  }
-  &:focus {
-    border: 1px solid $basic_color;
-    background: #fff;
-  }
-}
-
 .auth-error {
   width: 100%;
   color: rgb(194, 2, 2);
-}
-
-.auth-button {
-  display: block;
-  padding: 10px 15px;
-  text-transform: uppercase;
-  margin: 10px auto;
-  color: #fff;
-  background: $basic_color;
-  border: 1px solid $basic_darker;
-  border-radius: 8px;
-  &:hover {
-    cursor: pointer;
-    background: $basic_darker;
-  }
 }
 
 .auth-link {
