@@ -1,7 +1,55 @@
-.dialogList-container {
+.dialog-list-container {
   height: 99.8vh;
   width: 30%;
   border-right: 2px solid #c9c9;
   padding: 20px;
   background: rgba(255, 255, 255, 0.3);
+
+  .dialog-list-search-block {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .dialog-list-search {
+    width: 80%;
+    font-size: 20px;
+    padding: 5px 10px;
+    border: none;
+    color: #000;
+    background: initial;
+    border-bottom: 1px solid #000;
+  }
+
+  .dialog-list {
+    width: 100%;
+    height: 85vh;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: scroll;
+  }
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  /* Track */
+  .dialog-list::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+  }
+
+  /* Handle */
+  .dialog-list::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(173, 172, 172, 0.8);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+  }
+  .dialog-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.8);
+  }
 }
