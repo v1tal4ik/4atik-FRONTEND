@@ -12,14 +12,14 @@ const userSignUp = ({ email, name, password }) => {
     .catch(({ response }) => response.data);
 };
 
-const fetchUserData = (params) => {
-  return HTTP.get('/user', { params })
+const fetchUserData = () => {
+  return HTTP.get('/user')
     .then(({ data }) => data)
     .catch(({ response }) => ({ status: false, msg: response.data }));
 };
 
-const changePassword = (id, params) => {
-  return HTTP.post('/password', { id, ...params })
+const changePassword = (params) => {
+  return HTTP.post('user/password', params)
     .then(({ data }) => data)
     .catch(({ response }) => response.data);
 };

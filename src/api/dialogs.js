@@ -1,7 +1,7 @@
 import HTTP from './config';
 
-const fetchDialogList = (params) => {
-  return HTTP.get('/dialog', { params })
+const fetchDialogList = () => {
+  return HTTP.get('/dialog')
     .then(({ data }) => data)
     .catch(({ response }) => response.data);
 };

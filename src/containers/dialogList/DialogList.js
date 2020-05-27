@@ -7,9 +7,7 @@ const DialogList = () => {
   const [dialogs, setDialogs] = useState([]);
 
   const fetchDialogs = async () => {
-    // TODO re-write backend to get user id from JWT
-    const { id } = JSON.parse(localStorage.getItem('auth'));
-    const response = await fetchDialogList({ id });
+    const response = await fetchDialogList();
     if (response.status) {
       setDialogs(response.data);
     }

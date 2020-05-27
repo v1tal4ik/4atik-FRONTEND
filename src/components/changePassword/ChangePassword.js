@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import Rodal from 'rodal';
 import TextInput from '../common/TextInput';
@@ -17,7 +16,6 @@ const initialState = {
 };
 
 const ChangePassword = ({ willBeModalOpen, onClose }) => {
-  const { id } = useSelector((state) => state.user);
   const [data, setData] = useState(initialState);
 
   const handleChangeData = ({ target: { name, value } }) => {
@@ -41,7 +39,7 @@ const ChangePassword = ({ willBeModalOpen, onClose }) => {
     // TODO add error notification element and logic for it
     e.preventDefault();
 
-    const response = await changePassword(id, {
+    const response = await changePassword({
       oldPassword: data.oldPassword,
       newPassword: data.newPassword,
     });
