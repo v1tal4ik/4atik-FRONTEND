@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { fetchDialogList } from '../../api/dialogs';
 import DialogItem from '../../components/dialogItem/DialogItem';
+import { fetchDialogList } from '../../api/dialogs';
 import './style.scss';
 
 const DialogList = () => {
@@ -25,22 +25,10 @@ const DialogList = () => {
       <div className='dialog-list-search-block'>
         <input className='dialog-list-search' type='text' placeholder='Search' />
       </div>
-
       <div className='dialog-list'>
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
-        <DialogItem />
+        {dialogs.map((dialog) => (
+          <DialogItem key={dialog.id} {...dialog} />
+        ))}
       </div>
     </div>
   );
