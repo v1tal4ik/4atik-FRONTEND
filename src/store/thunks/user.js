@@ -17,8 +17,7 @@ export const signInThunk = ({ email, password }, callback) => {
 
 export const fetchUserdDataThunk = () => {
   return async (dispatch) => {
-    const { id } = JSON.parse(localStorage.getItem('auth'));
-    const response = await fetchUserData({ id });
+    const response = await fetchUserData();
     if (response.status) {
       const { user } = response;
       dispatch(setUserData(user));
